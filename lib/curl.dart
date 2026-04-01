@@ -215,7 +215,7 @@ class CurlClient implements Client {
 
     // --- Headers ---------------------------------------------------------
     request.headers.toSimpleMap().forEach((key, value) {
-      args.addAll(['-H', '$key: $value']);
+      if (key.toLowerCase() == 'cookie') { args.addAll(['-b', value]); } else { args.addAll(['-H', '$key: $value']); }
     });
 
     // --- Body (binary-safe via stdin pipe) --------------------------------
